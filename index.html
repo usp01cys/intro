@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Subhan — Personal Intro</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Cormorant Garamond (Editorial Romantic Serif) & Plus Jakarta Sans (Clean Modern Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+          },
+          colors: {
+            cream: '#FFFDF9',
+            blush: '#FFF5F7',
+            roseSoft: '#F8D7DA',
+            roseAccent: '#E11D48',
+            roseLight: '#FB7185',
+            roseDeep: '#B84E60',
+            cocoa: '#4A353B',
+            cocoaMuted: '#7D636A',
+          },
+          animation: {
+            'float-slow': 'floatSlow 9s ease-in-out infinite',
+            'float-delayed': 'floatSlow 11s ease-in-out 3s infinite',
+            'pulse-soft': 'pulseSoft 3s ease-in-out infinite',
+            'fade-up': 'fadeUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+            'wiggle': 'wiggle 2.5s ease-in-out infinite',
+          },
+          keyframes: {
+            floatSlow: {
+              '0%, 100%': { transform: 'translateY(0px) translateX(0px) scale(1)' },
+              '50%': { transform: 'translateY(-18px) translateX(10px) scale(1.04)' },
+            },
+            pulseSoft: {
+              '0%, 100%': { opacity: '0.85', transform: 'scale(1)' },
+              '50%': { opacity: '1', transform: 'scale(1.03)' },
+            },
+            fadeUp: {
+              '0%': { opacity: '0', transform: 'translateY(18px) scale(0.98)' },
+              '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
+            },
+            wiggle: {
+              '0%, 100%': { transform: 'rotate(0deg)' },
+              '15%': { transform: 'rotate(-6deg)' },
+              '30%': { transform: 'rotate(6deg)' },
+              '45%': { transform: 'rotate(-4deg)' },
+              '60%': { transform: 'rotate(4deg)' },
+              '75%': { transform: 'rotate(0deg)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom ambient background & smooth interactions */
+    body {
+      background-color: #FFFDF9;
+      color: #4A353B;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(251, 113, 133, 0.28);
+      box-shadow: 0 16px 38px -10px rgba(225, 29, 72, 0.12), 0 4px 12px -2px rgba(74, 53, 59, 0.04);
+    }
+
+    .glass-pill {
+      background: rgba(255, 245, 247, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(251, 113, 133, 0.35);
+    }
+
+    .soft-gradient-btn {
+      background: linear-gradient(135deg, #FB7185 0%, #E11D48 100%);
+      box-shadow: 0 10px 25px -6px rgba(225, 29, 72, 0.42);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .soft-gradient-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px -6px rgba(225, 29, 72, 0.52);
+    }
+
+    .soft-gradient-btn:active {
+      transform: translateY(0px) scale(0.98);
+    }
+
+    /* Floating heart particle animation */
+    @keyframes riseHeart {
+      0% {
+        opacity: 0;
+        transform: translateY(0) scale(0.6) rotate(-10deg);
+      }
+      20% {
+        opacity: 0.95;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-130px) scale(1.3) rotate(14deg);
+      }
+    }
+
+    .floating-heart {
+      position: fixed;
+      pointer-events: none;
+      z-index: 50;
+      animation: riseHeart 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    /* Subtle grain overlay for editorial warmth */
+    .noise-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 40;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    /* Step transition helper */
+    .step-panel {
+      display: none;
+    }
+    .step-panel.active {
+      display: block;
+      animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+  </style>
+</head>
+<body class="min-h-screen relative flex flex-col items-center justify-center py-6 px-4 sm:py-10 selection:bg-roseSoft selection:text-cocoa">
+
+  <!-- Subtle Editorial Grain -->
+  <div class="noise-overlay"></div>
+
+  <!-- Ambient Soft Romantic Bokeh Lights -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+    <div class="absolute -top-24 -left-20 w-80 h-80 rounded-full bg-gradient-to-br from-[#FFE4E6] via-[#FFF5F7] to-transparent blur-3xl opacity-90 animate-float-slow"></div>
+    <div class="absolute top-1/3 -right-24 w-96 h-96 rounded-full bg-gradient-to-bl from-[#FECDD3] via-[#FFF1F2] to-transparent blur-3xl opacity-80 animate-float-delayed"></div>
+    <div class="absolute -bottom-28 left-1/4 w-80 h-80 rounded-full bg-gradient-to-tr from-[#FFF5F7] via-[#FFE4E6] to-transparent blur-3xl opacity-85 animate-float-slow"></div>
+  </div>
+
+  <!-- Toast Notification (Replaces alert) -->
+  <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 opacity-0 pointer-events-none transition-all duration-300 transform -translate-y-2">
+    <div class="glass-card px-4 py-2.5 rounded-full flex items-center gap-2 shadow-lg border border-roseLight/40">
+      <span class="w-2 h-2 rounded-full bg-roseAccent animate-ping"></span>
+      <span id="toast-message" class="text-xs font-medium text-cocoa">Unlocked!</span>
+    </div>
+  </div>
+
+  <!-- Main Mobile-First Centered Container -->
+  <main class="w-full max-w-[430px] relative">
+
+    <!-- ==========================================
+         STAGE 0: LOCKSCREEN SECRET NOTIFICATION
+         ========================================== -->
+    <section id="step-0" class="step-panel active text-center space-y-6 py-6">
+      <!-- Dreamy Minimalist Clock / Header -->
+      <div class="space-y-1">
+        <p class="text-[11px] uppercase tracking-[0.22em] text-cocoaMuted font-semibold">Private Bio Link</p>
+        <h1 class="font-serif italic text-3xl sm:text-4xl text-cocoa font-semibold">For Curious Eyes Only ✨</h1>
+      </div>
+
+      <!-- Interactive Lockscreen Notification Card -->
+      <div 
+        onclick="unlockStep(1, event)"
+        role="button"
+        tabindex="0"
+        class="glass-card rounded-[30px] p-6 text-left cursor-pointer transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] relative overflow-hidden group animate-pulse-soft"
+      >
+        <!-- Soft Rose Shimmer -->
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none"></div>
+
+        <div class="flex items-center justify-between mb-3.5">
+          <div class="flex items-center gap-2">
+            <span class="w-7 h-7 rounded-xl bg-roseAccent/10 text-roseAccent flex items-center justify-center text-sm animate-wiggle">
+              💌
+            </span>
+            <span class="text-xs font-bold uppercase tracking-wider text-roseAccent">Secret Note</span>
+          </div>
+          <span class="text-[11px] font-medium text-cocoaMuted bg-blush px-2.5 py-0.5 rounded-full border border-roseLight/30">Just now</span>
+        </div>
+
+        <h2 class="font-serif text-2xl sm:text-[26px] font-semibold text-cocoa leading-snug mb-1.5">
+          1 New Secret Note from <span class="italic text-roseAccent">Subhan</span>
+        </h2>
+        <p class="text-xs sm:text-[13px] text-cocoaMuted leading-relaxed mb-5">
+          “Before you scroll past my Instagram... tap here to unlock who I actually am.”
+        </p>
+
+        <div class="w-full py-3 px-4 rounded-2xl soft-gradient-btn text-white text-xs sm:text-sm font-semibold flex items-center justify-center gap-2">
+          <span>Tap to Unlock Mystery</span>
+          <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+          </svg>
+        </div>
+      </div>
+
+      <p class="text-[11px] text-cocoaMuted/80">
+        Warning: May cause sudden urges to send a DM 🌸
+      </p>
+    </section>
+
+    <!-- ==========================================
+         PROGRESS HEADER (Visible in Steps 1 - 4)
+         ========================================== -->
+    <div id="progress-header" class="hidden mb-4 px-1">
+      <div class="flex items-center justify-between text-[11px] font-semibold text-cocoaMuted mb-2">
+        <span id="step-label">Chapter 1 of 4 • The Basics</span>
+        <span id="step-percent" class="text-roseAccent">25% Unlocked</span>
+      </div>
+      <div class="w-full h-1.5 bg-roseSoft/50 rounded-full overflow-hidden">
+        <div id="progress-bar" class="h-full bg-gradient-to-r from-roseLight to-roseAccent rounded-full transition-all duration-500" style="width: 25%"></div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         STEP 1: THE BASICS
+         ========================================== -->
+    <section id="step-1" class="step-panel glass-card rounded-[32px] p-6 sm:p-7 text-center relative overflow-hidden">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full glass-pill text-[11px] font-semibold text-roseAccent mb-4">
+        <span>✨ Chapter 01</span>
+        <span>•</span>
+        <span>First Impressions</span>
+      </div>
+
+      <!-- Monogram Crest -->
+      <div class="relative mx-auto w-20 h-20 mb-3 flex items-center justify-center">
+        <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-roseLight/40 via-blush to-roseSoft blur-md"></div>
+        <div class="relative w-20 h-20 rounded-full bg-gradient-to-b from-white to-blush border border-roseLight/40 flex items-center justify-center shadow-inner">
+          <span class="font-serif italic text-4xl font-semibold text-roseAccent select-none pr-0.5">S</span>
+        </div>
+      </div>
+
+      <h2 class="font-serif text-4xl font-semibold text-cocoa tracking-tight mb-1">Subhan</h2>
+      <p class="text-xs text-cocoaMuted mb-5">📍 Multan, Pakistan • Calm &amp; Lowkey Energy</p>
+
+      <!-- Quick Stats Grid -->
+      <div class="grid grid-cols-3 gap-2.5 mb-5">
+        <div class="rounded-2xl bg-blush/80 border border-roseLight/30 p-3">
+          <p class="text-[10px] uppercase tracking-wider text-cocoaMuted font-semibold">Age</p>
+          <p class="font-serif text-2xl font-bold text-cocoa">20</p>
+        </div>
+        <div class="rounded-2xl bg-blush/80 border border-roseLight/30 p-3">
+          <p class="text-[10px] uppercase tracking-wider text-cocoaMuted font-semibold">Height</p>
+          <p class="font-serif text-2xl font-bold text-cocoa">5'11"</p>
+        </div>
+        <div class="rounded-2xl bg-blush/80 border border-roseLight/30 p-3">
+          <p class="text-[10px] uppercase tracking-wider text-cocoaMuted font-semibold">Base</p>
+          <p class="font-serif text-xl font-bold text-roseAccent pt-0.5">Multan</p>
+        </div>
+      </div>
+
+      <!-- Playful Note -->
+      <div class="rounded-2xl bg-white/80 border border-roseLight/35 p-3.5 mb-6">
+        <p class="font-serif italic text-base sm:text-lg text-cocoa">
+          “Tall enough to reach the top shelf… and definitely tall enough to steal your oversized hoodies.”
+        </p>
+      </div>
+
+      <button 
+        onclick="unlockStep(2, event)"
+        class="soft-gradient-btn w-full py-3.5 px-5 rounded-2xl text-white font-semibold text-sm flex items-center justify-center gap-2"
+      >
+        <span>What’s Inside My Brain? 🧠</span>
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </button>
+    </section>
+
+    <!-- ==========================================
+         STEP 2: CAMPUS & BRAIN (USP & CYS)
+         ========================================== -->
+    <section id="step-2" class="step-panel glass-card rounded-[32px] p-6 sm:p-7 text-center relative overflow-hidden">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full glass-pill text-[11px] font-semibold text-roseAccent mb-4">
+        <span>🔐 Chapter 02</span>
+        <span>•</span>
+        <span>Campus &amp; Brain</span>
+      </div>
+
+      <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-blush border border-roseLight/40 flex items-center justify-center text-3xl shadow-sm">
+        🛡️
+      </div>
+
+      <h2 class="font-serif text-3xl font-semibold text-cocoa mb-1">Cyber Security Student</h2>
+      <p class="text-xs font-semibold text-roseAccent uppercase tracking-wider mb-4">
+        Institute of Southern Punjab (USP)
+      </p>
+
+      <div class="space-y-3 text-left mb-6">
+        <div class="p-3.5 rounded-2xl bg-white/75 border border-roseLight/30 flex items-start gap-3">
+          <span class="text-lg mt-0.5">💻</span>
+          <div>
+            <h3 class="text-xs font-bold text-cocoa">Ethical Hacker Vibes</h3>
+            <p class="text-xs text-cocoaMuted leading-relaxed">Learning how to break &amp; secure digital systems, networks, and late-night code.</p>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-blush/90 border border-roseLight/40 text-center">
+          <p class="font-serif italic text-lg text-cocoa leading-snug">
+            “Protects networks &amp; firewalls by day… still hasn’t figured out how to block your charm.”
+          </p>
+        </div>
+      </div>
+
+      <div class="flex gap-2.5">
+        <button 
+          onclick="unlockStep(1)"
+          class="px-4 py-3.5 rounded-2xl bg-white/80 hover:bg-blush text-cocoaMuted text-xs font-semibold border border-roseLight/40 transition-colors"
+        >
+          ← Back
+        </button>
+        <button 
+          onclick="unlockStep(3, event)"
+          class="soft-gradient-btn flex-1 py-3.5 px-5 rounded-2xl text-white font-semibold text-sm flex items-center justify-center gap-2"
+        >
+          <span>See My Daily Vibes ⚡</span>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         STEP 3: VIBES & HABITS
+         ========================================== -->
+    <section id="step-3" class="step-panel glass-card rounded-[32px] p-6 sm:p-7 relative overflow-hidden">
+      <div class="text-center mb-5">
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full glass-pill text-[11px] font-semibold text-roseAccent mb-3">
+          <span>🌸 Chapter 03</span>
+          <span>•</span>
+          <span>Vibes &amp; Habits</span>
+        </div>
+        <h2 class="font-serif text-3xl font-semibold text-cocoa">When I’m Not Studying</h2>
+        <p class="text-xs text-cocoaMuted">Here’s what keeps my energy high</p>
+      </div>
+
+      <div class="space-y-3 mb-6">
+        <!-- Football -->
+        <div class="flex items-center gap-3.5 p-3.5 rounded-2xl bg-white/80 border border-roseLight/35 transition-transform hover:-translate-y-0.5">
+          <div class="w-11 h-11 rounded-xl bg-blush flex items-center justify-center text-xl shrink-0">⚽</div>
+          <div>
+            <h3 class="text-sm font-bold text-cocoa">Football &amp; Messi Fan Energy</h3>
+            <p class="text-xs text-cocoaMuted">Evening turf matches, clean assists &amp; pure competitive spirit.</p>
+          </div>
+        </div>
+
+        <!-- Gaming -->
+        <div class="flex items-center gap-3.5 p-3.5 rounded-2xl bg-white/80 border border-roseLight/35 transition-transform hover:-translate-y-0.5">
+          <div class="w-11 h-11 rounded-xl bg-blush flex items-center justify-center text-xl shrink-0">🎮</div>
+          <div>
+            <h3 class="text-sm font-bold text-cocoa">Gaming (PUBG Mobile / PC)</h3>
+            <p class="text-xs text-cocoaMuted">Late-night squad lobbies, clutch finishes &amp; chill voice chats.</p>
+          </div>
+        </div>
+
+        <!-- Online Stuff -->
+        <div class="flex items-center gap-3.5 p-3.5 rounded-2xl bg-white/80 border border-roseLight/35 transition-transform hover:-translate-y-0.5">
+          <div class="w-11 h-11 rounded-xl bg-blush flex items-center justify-center text-xl shrink-0">✨</div>
+          <div>
+            <h3 class="text-sm font-bold text-cocoa">Cool Online Stuff</h3>
+            <p class="text-xs text-cocoaMuted">Designing aesthetic web pages (like this one 😉) &amp; exploring tech.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex gap-2.5">
+        <button 
+          onclick="unlockStep(2)"
+          class="px-4 py-3.5 rounded-2xl bg-white/80 hover:bg-blush text-cocoaMuted text-xs font-semibold border border-roseLight/40 transition-colors"
+        >
+          ← Back
+        </button>
+        <button 
+          onclick="unlockStep(4, event)"
+          class="soft-gradient-btn flex-1 py-3.5 px-5 rounded-2xl text-white font-semibold text-sm flex items-center justify-center gap-2"
+        >
+          <span>Play Vibe Check &amp; Cards 🎲</span>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         STEP 4: FUN MINI-GAMES & INSTAGRAM CTA
+         ========================================== -->
+    <section id="step-4" class="step-panel space-y-4">
+      
+      <!-- 1. Compatibility / Vibe Check Quiz -->
+      <div class="glass-card rounded-[28px] p-5 sm:p-6">
+        <div class="flex items-center justify-between mb-3">
+          <div>
+            <span class="text-[10px] font-bold uppercase tracking-wider text-roseAccent">Mini Game 01</span>
+            <h2 class="font-serif text-2xl font-semibold text-cocoa">Our Vibe Compatibility</h2>
+          </div>
+          <span class="text-xl">💘</span>
+        </div>
+
+        <div id="quiz-container" class="space-y-3">
+          <!-- Question 1 -->
+          <div class="p-3 rounded-2xl bg-white/75 border border-roseLight/30">
+            <p class="text-xs font-semibold text-cocoa mb-2">1. Ideal hangout energy?</p>
+            <div class="grid grid-cols-2 gap-2">
+              <button onclick="selectQuiz(1, 'A', this)" class="quiz-opt-1 py-2 px-2.5 rounded-xl text-xs font-medium bg-blush/70 hover:bg-roseSoft/70 text-cocoa border border-roseLight/30 transition-all">☕ Cozy Coffee</button>
+              <button onclick="selectQuiz(1, 'B', this)" class="quiz-opt-1 py-2 px-2.5 rounded-xl text-xs font-medium bg-blush/70 hover:bg-roseSoft/70 text-cocoa border border-roseLight/30 transition-all">🌙 Late-Night Drive</button>
+            </div>
+          </div>
+
+          <!-- Question 2 -->
+          <div class="p-3 rounded-2xl bg-white/75 border border-roseLight/30">
+            <p class="text-xs font-semibold text-cocoa mb-2">2. Pick our weekend duo mode:</p>
+            <div class="grid grid-cols-2 gap-2">
+              <button onclick="selectQuiz(2, 'A', this)" class="quiz-opt-2 py-2 px-2.5 rounded-xl text-xs font-medium bg-blush/70 hover:bg-roseSoft/70 text-cocoa border border-roseLight/30 transition-all">⚽ Football Match</button>
+              <button onclick="selectQuiz(2, 'B', this)" class="quiz-opt-2 py-2 px-2.5 rounded-xl text-xs font-medium bg-blush/70 hover:bg-roseSoft/70 text-cocoa border border-roseLight/30 transition-all">🎮 Gaming Duo</button>
+            </div>
+          </div>
+
+          <!-- Question 3 -->
+          <div class="p-3 rounded-2xl bg-white/75 border border-roseLight/30">
+            <p class="text-xs font-semibold text-cocoa mb-2">3. Conversation style?</p>
+            <div class="grid grid-cols-2 gap-2">
+              <button onclick="selectQuiz(3, 'A', this)" class="quiz-opt-3 py-2 px-2.5 rounded-xl text-xs font-medium bg-blush/70 hover:bg-roseSoft/70 text-cocoa border border-roseLight/30 transition-all">😂 Endless Memes</button>
+              <button onclick="selectQuiz(3, 'B', this)" class="quiz-opt-3 py-2 px-2.5 rounded-xl text-xs font-medium bg-blush/70 hover:bg-roseSoft/70 text-cocoa border border-roseLight/30 transition-all">✨ 2 AM Deep Talks</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quiz Result Box (Reveals when all 3 answered) -->
+        <div id="quiz-result" class="hidden mt-4 p-4 rounded-2xl bg-gradient-to-r from-blush to-[#FFE4E6] border border-roseLight/50 text-center animate-fade-up">
+          <p class="text-[11px] font-bold uppercase tracking-wider text-roseAccent mb-0.5">Match Score</p>
+          <p id="match-score" class="font-serif text-4xl font-bold text-roseAccent mb-1">99%</p>
+          <p id="match-text" class="text-xs text-cocoa font-medium leading-relaxed">
+            Dangerous levels of good chemistry! Looks like we already get along.
+          </p>
+        </div>
+      </div>
+
+      <!-- 2. Secret Envelopes / Pick a Card -->
+      <div class="glass-card rounded-[28px] p-5 sm:p-6">
+        <div class="mb-3">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-roseAccent">Mini Game 02</span>
+          <h2 class="font-serif text-2xl font-semibold text-cocoa">Tap a Secret Envelope</h2>
+          <p class="text-xs text-cocoaMuted">Pick one (or open all three 👀)</p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-2">
+          <button onclick="openEnvelope(0, event)" class="p-3 rounded-2xl bg-blush hover:bg-roseSoft/70 border border-roseLight/40 text-center transition-all active:scale-95">
+            <span class="text-2xl block mb-1">💌</span>
+            <span class="text-[11px] font-semibold text-cocoa block leading-tight">A Compliment</span>
+          </button>
+
+          <button onclick="openEnvelope(1, event)" class="p-3 rounded-2xl bg-blush hover:bg-roseSoft/70 border border-roseLight/40 text-center transition-all active:scale-95">
+            <span class="text-2xl block mb-1">🤫</span>
+            <span class="text-[11px] font-semibold text-cocoa block leading-tight">A Fun Fact</span>
+          </button>
+
+          <button onclick="openEnvelope(2, event)" class="p-3 rounded-2xl bg-blush hover:bg-roseSoft/70 border border-roseLight/40 text-center transition-all active:scale-95">
+            <span class="text-2xl block mb-1">☕</span>
+            <span class="text-[11px] font-semibold text-cocoa block leading-tight">A Date Idea</span>
+          </button>
+        </div>
+
+        <!-- Envelope Reveal Area -->
+        <div id="envelope-display" class="mt-3 p-3.5 rounded-2xl bg-white/85 border border-roseLight/40 text-center min-h-[64px] flex items-center justify-center">
+          <p id="envelope-text" class="font-serif italic text-base text-cocoaMuted">
+            Tap any envelope above to reveal a hidden note...
+          </p>
+        </div>
+      </div>
+
+      <!-- 3. Final Instagram DM CTA & Replay -->
+      <div class="glass-card rounded-[28px] p-5 text-center space-y-3">
+        <p class="font-serif italic text-lg text-cocoa">
+          “You made it to the end… now it’s your turn to say hi.”
+        </p>
+
+        <!-- NOTE: Replace 'https://instagram.com/' with your exact Instagram URL (e.g. https://instagram.com/your_username) -->
+        <a 
+          href="https://instagram.com/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="soft-gradient-btn w-full py-3.5 px-5 rounded-2xl text-white font-semibold text-sm flex items-center justify-center gap-2"
+        >
+          <span>Slide into my DMs on Instagram 💌</span>
+        </a>
+
+        <button 
+          onclick="resetVibe()"
+          class="text-xs font-medium text-cocoaMuted hover:text-roseAccent transition-colors pt-1 inline-flex items-center gap-1"
+        >
+          <span>↺ Replay the Vibe</span>
+        </button>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script>
+    // Toast notification helper
+    let toastTimeout;
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-message');
+      toastMsg.textContent = message;
+
+      toast.classList.remove('opacity-0', '-translate-y-2', 'pointer-events-none');
+      toast.classList.add('opacity-100', 'translate-y-0');
+
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', '-translate-y-2', 'pointer-events-none');
+      }, 2200);
+    }
+
+    // Spawn floating hearts animation on interactions
+    function burstHearts(event, count = 6) {
+      const colors = ['#E11D48', '#FB7185', '#F43F5E', '#FDA4AF'];
+      let originX = window.innerWidth / 2;
+      let originY = window.innerHeight / 2;
+
+      if (event && event.currentTarget) {
+        const rect = event.currentTarget.getBoundingClientRect();
+        originX = rect.left + rect.width / 2;
+        originY = rect.top + rect.height / 3;
+      }
+
+      for (let i = 0; i < count; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'floating-heart';
+        const offsetX = (Math.random() - 0.5) * 90;
+        heart.style.left = `${originX + offsetX}px`;
+        heart.style.top = `${originY}px`;
+        heart.style.color = colors[i % colors.length];
+        heart.style.animationDelay = `${i * 0.06}s`;
+        heart.innerHTML = `
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        `;
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 1700);
+      }
+    }
+
+    // Step-by-step navigation controller
+    const stepMeta = {
+      1: { label: 'Chapter 1 of 4 • The Basics', percent: '25%' },
+      2: { label: 'Chapter 2 of 4 • Campus & Brain', percent: '50%' },
+      3: { label: 'Chapter 3 of 4 • Vibes & Habits', percent: '75%' },
+      4: { label: 'Chapter 4 of 4 • Fun & Finale', percent: '100%' }
+    };
+
+    function unlockStep(stepNum, event) {
+      if (event) burstHearts(event, 5);
+
+      // Hide all panels
+      document.querySelectorAll('.step-panel').forEach(panel => {
+        panel.classList.remove('active');
+      });
+
+      // Show selected panel
+      const target = document.getElementById(`step-${stepNum}`);
+      if (target) target.classList.add('active');
+
+      // Update progress header
+      const header = document.getElementById('progress-header');
+      if (stepNum === 0) {
+        header.classList.add('hidden');
+      } else {
+        header.classList.remove('hidden');
+        document.getElementById('step-label').textContent = stepMeta[stepNum].label;
+        document.getElementById('step-percent').textContent = `${stepMeta[stepNum].percent} Unlocked`;
+        document.getElementById('progress-bar').style.width = stepMeta[stepNum].percent;
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Vibe Check Quiz Logic
+    const quizAnswers = {};
+    function selectQuiz(qNum, choice, btnEl) {
+      quizAnswers[qNum] = choice;
+
+      // Highlight active button in that question row
+      document.querySelectorAll(`.quiz-opt-${qNum}`).forEach(btn => {
+        btn.classList.remove('bg-roseAccent', 'text-white', 'border-roseAccent');
+        btn.classList.add('bg-blush/70', 'text-cocoa');
+      });
+      btnEl.classList.remove('bg-blush/70', 'text-cocoa');
+      btnEl.classList.add('bg-roseAccent', 'text-white', 'border-roseAccent');
+
+      // Check if all 3 questions are answered
+      if (quizAnswers[1] && quizAnswers[2] && quizAnswers[3]) {
+        const resultBox = document.getElementById('quiz-result');
+        const scoreEl = document.getElementById('match-score');
+        const textEl = document.getElementById('match-text');
+
+        // Always produces a charming high score (98% or 100%)
+        const isPerfect = (quizAnswers[1] === 'B' && quizAnswers[3] === 'B') || (quizAnswers[2] === 'B');
+        scoreEl.textContent = isPerfect ? '100%' : '98%';
+        textEl.textContent = isPerfect
+          ? '100% Soulmate Vibe! Late-night talks & good energy — DM me right now ✨'
+          : '98% Certified Vibe! Honestly, we’d have the best conversations. Say hi on IG 🌸';
+
+        resultBox.classList.remove('hidden');
+        burstHearts({ currentTarget: resultBox }, 10);
+        showToast('Compatibility Unlocked! 💘');
+      }
+    }
+
+    // Secret Envelopes Data & Reveal
+    const envelopeNotes = [
+      '“Honestly, if you’re reading this, your curiosity already makes you my favorite person on Instagram today ✨”',
+      '“Fun Fact: Even though I study Cyber Security, I’m terrible at hiding a smile when I get a good text 😅”',
+      '“Date Idea: Iced coffee, good music on a sunset drive, and debating whether Messi is the undisputed GOAT ☕🌅”'
+    ];
+
+    function openEnvelope(index, event) {
+      burstHearts(event, 4);
+      const displayText = document.getElementById('envelope-text');
+      displayText.classList.remove('text-cocoaMuted');
+      displayText.classList.add('text-cocoa', 'font-medium');
+      displayText.textContent = envelopeNotes[index];
+    }
+
+    // Reset back to Lockscreen Notification
+    function resetVibe() {
+      Object.keys(quizAnswers).forEach(k => delete quizAnswers[k]);
+      document.querySelectorAll('[class*="quiz-opt-"]').forEach(btn => {
+        btn.classList.remove('bg-roseAccent', 'text-white', 'border-roseAccent');
+        btn.classList.add('bg-blush/70', 'text-cocoa');
+      });
+      document.getElementById('quiz-result').classList.add('hidden');
+      const displayText = document.getElementById('envelope-text');
+      displayText.classList.add('text-cocoaMuted');
+      displayText.classList.remove('text-cocoa', 'font-medium');
+      displayText.textContent = 'Tap any envelope above to reveal a hidden note...';
+
+      unlockStep(0);
+      showToast('Locked back up 🔒');
+    }
+  </script>
+</body>
+</html>
